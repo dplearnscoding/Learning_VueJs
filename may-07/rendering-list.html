@@ -1,0 +1,35 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Conditional-Rendering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- "v-if" attaches or deattaches the DOM elements. -->
+        <p v-if="show">You can see me!!</p>
+        <p v-else>You can also see me!!</p>
+        <button @click="show = !show">Switch</button>
+
+        <template>
+            <!-- "v-show sets the display to be None. "-->
+            <h1 v-show="show">Heading a template</h1>
+            <p>Inside a template.</p>
+        </template>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show: true
+            }
+        })
+    </script>
+    
+</body>
+</html>

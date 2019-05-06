@@ -1,0 +1,87 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue DOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Rendering value of title stored in the Vue instance. -->
+        <p>{{ title }}</p>
+
+        <!-- Rendering the value of link as a http link. -->
+        <a v-bind:href="link">Link to my website.</a>
+
+        <!-- Calling a function and rendering it's return value. -->
+        <p>{{ sayHello() }}</p>
+
+        <!-- Rendering of finished link. -->
+        <p v-html="finished_link">The finished link is: {{finished_link}}</p>
+
+        <!--Add the functionality of counter in Vue.-->
+        <!--Adding the directive v-on:click to handle the event. -->
+        <button v-on:click="increase">Click Me</button>
+        <p>{{ counter }}</p>
+        
+        <!--Adding the functionality of getting the co-ordinates of the mouse-hover through event parameter. -->
+        <p v-on:mousemove="updateCoordinate">Coordinates: {{ x }} / {{ y }} - 
+            <span v-on:mousemove="dummy">DEAD SPOT</span> 
+        </p>
+
+        <!-- Key Modifiers -->
+        <input id="inputText" type="text" v-on:keyup.enter="alertMe">
+
+        <!-- Two way data binding -->
+        <input type="text" v-model="name">
+        <p>{{ name }}</p>
+
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                title: "Hello World !!!",
+                link: "http://www.google.com/",
+                finished_link: "<p>The rendered link is : <a href='http://www.google.com'>Complete link</a></p>",
+                counter: 0,
+                x : 0,
+                y : 0,
+                name: "Durgaprasad",
+            },
+            methods: {
+                sayHello: function(){
+                    return 'Hello, I am called from a function.';
+                },
+
+                increase: function(){
+                    this.counter += 1;
+                },
+
+                updateCoordinate : function(e){
+                    this.x = e.clientX;
+                    this.y = e.clientY; 
+                },
+
+                dummy: function(event){
+                    event.stopPropagation();
+                },
+
+                alertMe: function(event){
+                    var info = document.getElementById("inputText").value;
+                    console.log(info)
+                    alert(info);
+                },
+
+                printName: function(){
+                    console.log(this.name);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
